@@ -1,0 +1,23 @@
+.web-ui {
+   background-color: #212121;
+   color: #FAFAFA;
+}
+
+.ssid-link:link {
+    text-decoration: none;
+}
+
+
+.ssid-link:visited {
+    text-decoration: none;
+}
+
+
+.ssid-link:hover {
+    text-decoration: none;
+}
+
+
+.ssid-link:active {
+    text-decoration: none;
+}
