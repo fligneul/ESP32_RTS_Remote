@@ -17,8 +17,8 @@
         if ($.urlParam('remoteId') != "") {
             $.getJSON("/api/remotes?remoteId=" + $.urlParam('remoteId'), function (data) {
                 $("#remoteId").val(data["id"]);
-                $("#remoteName").val(data["description"]);
-                $("#rollingCode").val(data["title"]);
+                $("#remoteName").val(data["name"]);
+                $("#rollingCode").val(data["rollingCode"]);
             })
                 .fail(function () {
                     console.log("error");
@@ -36,7 +36,7 @@
                 <h1>ESP RTS Remote</h1>
                 <div class="mt-4">
                     <h2>Remote</h2>
-                    <form method="POST" action="/mqtt">
+                    <form method="POST" action="/api/remotes">
                         <div class="mb-3 text-start">
                             <label for="remoteId" class="form-label">ID</label>
                             <input type="text" class="form-control" id="remoteId" name="remoteId" value="">

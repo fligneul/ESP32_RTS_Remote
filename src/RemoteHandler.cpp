@@ -30,7 +30,7 @@ void RemoteHandler_::begin() {
     remoteMap.clear();
     for (JsonObject remote : config["remotes"].as<JsonArray>()) {
         uint32_t remoteId = remote["id"];
-        String *remoteKey = new String(NVS_REMOTE_KEY_PREFIX + String(remoteId));
+        String *remoteKey = new String(NVS_REMOTE_KEY_PREFIX + String(remoteId, HEX));
         Serial.print("Remote ");
         Serial.println(*remoteKey);
 
