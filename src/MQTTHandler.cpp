@@ -9,8 +9,8 @@
 #include "CommandQueue.h"
 #include "Constants.h"
 #include "MQTTConfig.h"
-#include "RemoteConfig.h"
 #include "RemoteCommand.h"
+#include "RemoteConfig.h"
 #include "WifiHandler.h"
 
 #define RECONNECT_INTERVAL 10000
@@ -29,8 +29,7 @@ void handleMessage(String &topic, String &payload) {
     std::smatch matches;
 
     if (std::regex_match(s_topic, matches, std::regex(str))) {
-        RemoteCommand command = {
-            (uint32_t)strtoul(matches.str(1).c_str(), 0, 16), payload};
+        RemoteCommand command = {(uint32_t)strtoul(matches.str(1).c_str(), 0, 16), payload};
         CommandQueue.registerCommand(command);
     } else {
         Serial.println("MQTT topic not supported");
@@ -39,13 +38,10 @@ void handleMessage(String &topic, String &payload) {
 
 void MQTTHandler::begin() {
     preferences.begin(NVS_MQTT_NAMESPACE, true);
-    isConfigured = WifiHandler.configured() &&
-                   preferences.isKey(NVS_MQTT_HOST_KEY) &&
-                   !preferences.getString(NVS_MQTT_HOST_KEY).isEmpty();
+    isConfigured = WifiHandler.configured() && preferences.isKey(NVS_MQTT_HOST_KEY) && !preferences.getString(NVS_MQTT_HOST_KEY).isEmpty();
 
     if (isConfigured) {
-        mqttClient.begin(preferences.getString(NVS_MQTT_HOST_KEY).c_str(),
-                         wifiClient);
+        mqttClient.begin(preferences.getString(NVS_MQTT_HOST_KEY).c_str(), wifiClient);
         mqttClient.onMessage(handleMessage);
 
         connect();
@@ -64,23 +60,15 @@ void MQTTHandler::loop() {
 
 void MQTTHandler::connect() {
     // Async connect to MQTT
-    if (WifiHandler.connected() && !mqttClient.connected() &&
-        ((millis() - lastTry) > RECONNECT_INTERVAL)) {
+    if (WifiHandler.connected() && !mqttClient.connected() && ((millis() - lastTry) > RECONNECT_INTERVAL)) {
         lastTry = millis();
 
-        if (mqttClient.connect(
-                preferences
-                    .getString(NVS_MQTT_CLIENT_NAME_KEY,
-                               NVS_MQTT_CLIENT_NAME_DEFAULT)
-                    .c_str(),
-                preferences.getString(NVS_MQTT_USER_KEY).c_str(),
-                preferences.getString(NVS_MQTT_PASSWORD_KEY).c_str())) {
+        if (mqttClient.connect(preferences.getString(NVS_MQTT_CLIENT_NAME_KEY, NVS_MQTT_CLIENT_NAME_DEFAULT).c_str(),
+                               preferences.getString(NVS_MQTT_USER_KEY).c_str(), preferences.getString(NVS_MQTT_PASSWORD_KEY).c_str())) {
             Serial.println("MQTT Connected");
             // add config
-            mqttClient.subscribe(
-                preferences.getString(NVS_MQTT_TOPIC_KEY,
-                                      NVS_MQTT_TOPIC_DEFAULT) +
-                WILDCARD_TOPIC);
+            mqttClient.subscribe(preferences.getString(NVS_MQTT_TOPIC_KEY, NVS_MQTT_TOPIC_DEFAULT) + WILDCARD_TOPIC,
+                                 preferences.getUChar(NVS_MQTT_QOS_KEY, NVS_MQTT_QOS_DEFAULT));
         }
     }
 }

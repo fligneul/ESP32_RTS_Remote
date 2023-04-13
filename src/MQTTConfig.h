@@ -7,8 +7,10 @@
 #define NVS_MQTT_USER_KEY "mqtt_user"
 #define NVS_MQTT_PASSWORD_KEY "mqtt_passwd"
 #define NVS_MQTT_TOPIC_KEY "mqtt_topic"
+#define NVS_MQTT_QOS_KEY "mqtt_qos"
 
 #define NVS_MQTT_CLIENT_NAME_DEFAULT "ESP_RTS_REMOTE"
 #define NVS_MQTT_TOPIC_DEFAULT "/esp_rts"
+#define NVS_MQTT_QOS_DEFAULT 0
 
 #define WILDCARD_TOPIC "/#"

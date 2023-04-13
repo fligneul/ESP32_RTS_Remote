@@ -24,7 +24,7 @@
                             <label for="host" class="form-label">Host</label>
                             <input type="text" class="form-control" id="host" name="host" value="%HOST%">
                         </div>
-						<div class="mb-3 text-start">
+                        <div class="mb-3 text-start">
                             <label for="client" class="form-label">Client name</label>
                             <input type="text" class="form-control" id="client" name="client" value="%CLIENT%">
                         </div>
@@ -32,7 +32,15 @@
                             <label for="topic" class="form-label">Main Topic</label>
                             <input type="text" class="form-control" id="topic" name="topic" value="%TOPIC%">
                         </div>
-						<div class="mb-3 text-start">
+                        <div class="mb-3 text-start">
+                            <label for="qos" class="form-label">QoS</label>
+                            <select class="form-select" name="qos" id="qos">
+                                <option value="0" %QOS_0_SELECTED%>0 - At most once</option>
+                                <option value="1" %QOS_1_SELECTED%>1 - At least once</option>
+                                <option value="2" %QOS_2_SELECTED%>2 - Exactly once</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 text-start">
                             <label for="user" class="form-label">User</label>
                             <input type="text" class="form-control" id="user" name="user" value="%USER%">
                         </div>
