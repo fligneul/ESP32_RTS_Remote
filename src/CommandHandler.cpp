@@ -21,7 +21,7 @@ void CommandHandler::handle() {
         auto search = RemoteHandler.getRemoteMap()->find(remoteCommand.remoteID);
         if (search != RemoteHandler.getRemoteMap()->end()) {
             const Command command = getSomfyCommand(remoteCommand.rawCommand);
-            search->second->sendCommand(command);
+            search->second->sendCommand(command, 0);
         } else {
             Serial.println("Remote not found");
         }
