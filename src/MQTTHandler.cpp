@@ -36,7 +36,7 @@ void handleMessage(String &topic, String &payload) {
     }
 }
 
-void MQTTHandler::begin() {
+void MQTTHandler_::begin() {
     preferences.begin(NVS_MQTT_NAMESPACE, true);
     isConfigured = WifiHandler.configured() && preferences.isKey(NVS_MQTT_HOST_KEY) && !preferences.getString(NVS_MQTT_HOST_KEY).isEmpty();
 
@@ -48,7 +48,7 @@ void MQTTHandler::begin() {
     }
 }
 
-void MQTTHandler::loop() {
+void MQTTHandler_::loop() {
     if (isConfigured && WifiHandler.connected()) {
         if (!mqttClient.connected()) {
             connect();
@@ -58,7 +58,7 @@ void MQTTHandler::loop() {
     }
 }
 
-void MQTTHandler::connect() {
+void MQTTHandler_::connect() {
     // Async connect to MQTT
     if (WifiHandler.connected() && !mqttClient.connected() && ((millis() - lastTry) > RECONNECT_INTERVAL)) {
         lastTry = millis();
@@ -72,3 +72,12 @@ void MQTTHandler::connect() {
         }
     }
 }
+
+// Singleton methods
+
+MQTTHandler_ &MQTTHandler_::getInstance() {
+    static MQTTHandler_ instance;
+    return instance;
+}
+
+MQTTHandler_ &MQTTHandler = MQTTHandler.getInstance();

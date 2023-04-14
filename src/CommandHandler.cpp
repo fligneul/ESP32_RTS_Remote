@@ -16,7 +16,7 @@ unsigned long lastSend = 0;
 
 // Handle waiting command
 // Should be called at each loop
-void CommandHandler::handle() {
+void CommandHandler_::handle() {
     if (CommandQueue.commandWaiting() && ((millis() - lastSend) > COMMAND_INTERVAL)) {
         RemoteCommand remoteCommand = CommandQueue.getCommand();
 
@@ -32,3 +32,12 @@ void CommandHandler::handle() {
         lastSend = millis();
     }
 }
+
+// Singleton methods
+
+CommandHandler_ &CommandHandler_::getInstance() {
+    static CommandHandler_ instance;
+    return instance;
+}
+
+CommandHandler_ &CommandHandler = CommandHandler.getInstance();

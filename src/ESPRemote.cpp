@@ -24,9 +24,6 @@ MQTTWebConfig mqttWebConfig(&server);
 RemoteWebConfig remoteWebConfig(&server);
 RemoteAPI remoteAPI(&server);
 
-CommandHandler commandHandler;
-MQTTHandler mqttHandler;
-
 EasyButton progButton(GPIO_PROG_PIN);
 
 void onLongPress() {
@@ -70,15 +67,16 @@ void setup() {
         remoteAPI.begin();
 
         // Start web config ui
-        wifiWebConfig.begin(false);
+        wifiWebConfig.begin();
         otaWebConfig.begin();
         mqttWebConfig.begin();
         remoteWebConfig.begin();
 
+        // Load remotes config
         RemoteHandler.begin();
 
         // Start MQTT handler
-        mqttHandler.begin();
+        MQTTHandler.begin();
     }
 
     // Start wifi scanner
@@ -105,9 +103,9 @@ void setup() {
 
 void loop() {
     WifiHandler.loop();
-    mqttHandler.loop();
+    MQTTHandler.loop();
 
-    commandHandler.handle();
+    CommandHandler.handle();
 
     progButton.read();
     delay(5);

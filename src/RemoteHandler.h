@@ -18,7 +18,6 @@ class RemoteHandler_ {
     RemoteHandler_(const RemoteHandler_ &) = delete;  // no copying
     RemoteHandler_ &operator=(const RemoteHandler_ &) = delete;
 
-   public:
     void begin();
     std::map<uint32_t, SomfyRemote *> *getRemoteMap();
 };

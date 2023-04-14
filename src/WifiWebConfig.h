@@ -11,5 +11,5 @@ class WifiWebConfig {
 
    public:
     WifiWebConfig(AsyncWebServer *webServer);
-    void begin(const bool accessPoint);
+    void begin(const bool accessPoint = false);
 };
