@@ -16,7 +16,7 @@ std::map<uint32_t, String> readConfig() {
 
     preferences.begin(NVS_REMOTE_NAMESPACE, true);
 
-    DynamicJsonDocument config(1024);
+    JsonDocument config;
     DeserializationError error = deserializeJson(config, preferences.getString("config", "{}").c_str());
 
     if (error) {

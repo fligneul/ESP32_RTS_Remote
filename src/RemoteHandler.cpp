@@ -18,7 +18,7 @@ void RemoteHandler_::begin() {
 
     preferences.begin(NVS_REMOTE_NAMESPACE, true);
 
-    DynamicJsonDocument config(1024);
+    JsonDocument config;
     DeserializationError error = deserializeJson(config, preferences.getString("config", "{}").c_str());
 
     if (error) {

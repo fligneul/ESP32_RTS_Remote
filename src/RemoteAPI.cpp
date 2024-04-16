@@ -13,7 +13,7 @@ std::map<uint32_t, Remote> RemoteAPI::readConfig() {
     Preferences preferences;
     preferences.begin(NVS_REMOTE_NAMESPACE, true);
 
-    DynamicJsonDocument config(1024);
+    JsonDocument config;
     DeserializationError error = deserializeJson(config, preferences.getString("config", "{}").c_str());
 
     if (error) {
@@ -93,12 +93,12 @@ void RemoteAPI::saveConfig(std::map<uint32_t, Remote> remotesMap) {
     Preferences preferences;
     preferences.begin(NVS_REMOTE_NAMESPACE);
 
-    DynamicJsonDocument configJson(1024);
-    JsonArray remotes = configJson.createNestedArray("remotes");
+    JsonDocument configJson;
+    JsonArray remotes = configJson["remotes"].to<JsonArray>();
 
     for (const auto &remote : remotesMap) {
         // Build remote json
-        DynamicJsonDocument remoteJson(256);
+        JsonDocument remoteJson;
         remoteJson["id"] = remote.second.id;
         remoteJson["name"] = remote.second.name;
         remotes.add(remoteJson);
@@ -126,7 +126,7 @@ void RemoteAPI::begin() {
             if (search != remotesMap.end()) {
                 // Build remote json
                 AsyncResponseStream *response = request->beginResponseStream("application/json");
-                DynamicJsonDocument remote(256);
+                JsonDocument remote;
                 remote["id"] = search->second.id;
                 remote["name"] = search->second.name;
                 remote["rollingCode"] = search->second.rollingCode;
@@ -138,10 +138,10 @@ void RemoteAPI::begin() {
             }
         } else {
             AsyncResponseStream *response = request->beginResponseStream("application/json");
-            DynamicJsonDocument remotesJson(1024);
+            JsonDocument remotesJson;
             for (const auto &remote : readConfigWithRollingCode()) {
                 // Build remote json
-                DynamicJsonDocument remoteJson(256);
+                JsonDocument remoteJson;
                 remoteJson["id"] = remote.second.id;
                 remoteJson["name"] = remote.second.name;
                 remoteJson["rollingCode"] = remote.second.rollingCode;
