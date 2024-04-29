@@ -3,7 +3,7 @@ name: PlatformIO CI Release
 on:
   push:
     tags:
-      - '*'
+      - 'v*.*.*'
 
 jobs:
   release:
@@ -31,10 +31,14 @@ jobs:
             pio run -t buildfs -e esp32-c3
 
         - name: Upload binaries to release
-          uses: svenstaro/upload-release-action@v2
+          uses: softprops/action-gh-release@v2
           with:
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: .pio/build/esp32-c3/(bootloader.bin|partitions.bin|firmware.bin|spiffs.bin)
-            tag: ${{ github.ref }}
-            overwrite: true
-            file_glob: true
+            token: ${{ secrets.GITHUB_TOKEN }}
+            fail_on_unmatched_files: true
+            generate_release_notes: true
+            make_latest: true
+            files: |
+              .pio/build/esp32-c3/bootloader.bin
+              .pio/build/esp32-c3/partitions.bin
+              .pio/build/esp32-c3/firmware.bin
+              .pio/build/esp32-c3/spiffs.bin
