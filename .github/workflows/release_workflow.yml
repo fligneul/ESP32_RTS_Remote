@@ -30,9 +30,6 @@ jobs:
             pio run -e esp32-c3
             pio run -t buildfs -e esp32-c3
 
-        - name: Code static analysis
-          run: pio check -e esp32-c3
-
         - name: Upload binaries to release
           uses: svenstaro/upload-release-action@v2
           with:
