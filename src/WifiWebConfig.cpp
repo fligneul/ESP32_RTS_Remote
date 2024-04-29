@@ -22,7 +22,7 @@ String wifiProcessor(const String &var) {
         processed = preferences.getString(NVS_WIFI_HOSTNAME_KEY, NVS_WIFI_HOSTNAME_KEY_DEFAULT);
     } else if (var == "AVAILABLE_WIFI") {
         for (size_t i = 0; i < WiFi.scanComplete(); i++) {
-            processed += "<p><a class=\"ssid-link\" href=\"#\">" + WiFi.SSID(i) + "</a></p>";
+            processed += "<p><a class=\"ssid-link\" href=\"#\">" + WiFi.SSID(i) + " (" + WiFi.RSSI(i) + "dBm)</a></p>";
         }
     }
     preferences.end();

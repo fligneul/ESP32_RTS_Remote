@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.ssid-link').click(function () {
-        $("#ssid").val($(this).text());
+        $("#ssid").val($(this).text().substring(0, $(this).text().lastIndexOf("(") - 1));
         $("#passwd").val("");
     });
 
