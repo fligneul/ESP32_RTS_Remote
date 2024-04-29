@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ESP RTS Remote - MQTT config</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="jquery-3.6.4.min.js"></script>
+    <script src="script.js"></script>
+
+</head>
+
+<body class="web-ui">
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col-8 col-md-6 col-lg-4 col-xl-4 mx-auto">
+                <h1>ESP RTS Remote</h1>
+                <div class="mt-4">
+                    <h2>MQTT configuration</h2>
+                    <form method="POST" action="/mqtt">
+                        <div class="mb-3 text-start">
+                            <label for="host" class="form-label">Host</label>
+                            <input type="text" class="form-control" id="host" name="host" value="%HOST%">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="client" class="form-label">Client name</label>
+                            <input type="text" class="form-control" id="client" name="client" value="%CLIENT%">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="topic" class="form-label">Main Topic</label>
+                            <input type="text" class="form-control" id="topic" name="topic" value="%TOPIC%">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="qos" class="form-label">QoS</label>
+                            <select class="form-select" name="qos" id="qos">
+                                <option value="0" %QOS_0_SELECTED%>0 - At most once</option>
+                                <option value="1" %QOS_1_SELECTED%>1 - At least once</option>
+                                <option value="2" %QOS_2_SELECTED%>2 - Exactly once</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="user" class="form-label">User</label>
+                            <input type="text" class="form-control" id="user" name="user" value="%USER%">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="passwd" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="passwd" name="passwd" value="%PASSWD%">
+                        </div>
+                        <div class="mt-5 d-grid gap-2">
+                            <button class="btn btn-lg btn-success" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <hr class="mt-4" />
+                <div class="my-4 d-grid gap-2">
+                    <button id="mainMenuBtn" class="btn btn-lg btn-primary" type="button">Main menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

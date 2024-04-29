@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ESP RTS Remote - Firmware upgrade</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="jquery-3.6.4.min.js"></script>
+    <script src="script.js"></script>
+
+</head>
+
+<body class="web-ui">
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col-8 col-md-6 col-lg-4 col-xl-4 mx-auto">
+                <h1>ESP RTS Remote</h1>
+                <div class="mt-4">
+                    <h2>OTA upgrade by file upload</h2>
+                    <form method='POST' action='/ota' enctype='multipart/form-data' onsubmit="return confirm('Confirm firmware update');">
+                        <div class="mt-5 mb-3 text-start">
+                            <input type="file" class="form-control" id="ota-file" name='update'>
+                        </div>
+                        <div class="mt-5 d-grid gap-2">
+                            <button class="btn btn-lg btn-danger" type="submit">Start upgrade</button>
+                        </div>
+                    </form>
+                </div>
+                <hr class="mt-4" />
+                <div class="my-4 d-grid gap-2">
+                    <button id="mainMenuBtn" class="btn btn-lg btn-primary" type="button">Main menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
