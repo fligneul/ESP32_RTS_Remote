@@ -10,7 +10,7 @@
 #include "RemoteCommand.h"
 #include "RemoteHandler.h"
 
-#define COMMAND_INTERVAL 100
+#define COMMAND_INTERVAL 50
 
 unsigned long lastSend = 0;
 
@@ -25,7 +25,7 @@ void CommandHandler_::handle() {
         auto search = RemoteHandler.getRemoteMap()->find(remoteCommand.remoteID);
         if (search != RemoteHandler.getRemoteMap()->end()) {
             const Command command = getSomfyCommand(remoteCommand.rawCommand);
-            search->second->sendCommand(command, 2);
+            search->second->sendCommand(command, 3);
         } else {
             Serial.println("Remote not found");
         }
