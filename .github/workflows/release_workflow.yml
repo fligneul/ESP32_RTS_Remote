@@ -18,7 +18,7 @@ jobs:
               ~/.platformio/.cache
             key: ${{ runner.os }}-pio
   
-        - uses: actions/setup-python@v4
+        - uses: actions/setup-python@v5
           with:
             python-version: '3.11'
   
@@ -26,7 +26,9 @@ jobs:
           run: pip install --upgrade platformio
   
         - name: Build PlatformIO Project
-          run: pio run -e esp32-c3
+          run: |
+            pio run -e esp32-c3
+            pio run -t buildfs -e esp32-c3
 
         - name: Code static analysis
           run: pio check -e esp32-c3
@@ -35,7 +37,7 @@ jobs:
           uses: svenstaro/upload-release-action@v2
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: .pio/build/*/firmware_*.bin
+            file: .pio/build/esp32-c3/(bootloader.bin|partitions.bin|firmware.bin|spiffs.bin)
             tag: ${{ github.ref }}
             overwrite: true
             file_glob: true
