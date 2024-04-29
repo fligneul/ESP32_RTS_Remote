@@ -9,7 +9,9 @@ $(document).ready(function () {
     });
 
     $("#restartBtn").click(function () {
-        window.location.href = "/restart"
+        if (confirm("Confirm reboot") == true) {
+            window.location.href = "/restart";
+        }
     });
 
     $("#mainMenuBtn").click(function () {
@@ -19,7 +21,7 @@ $(document).ready(function () {
     $("#wifiMenuBtn").click(function () {
         window.location.href = "/wifi";
     });
-    
+
     $("#mqttMenuBtn").click(function () {
         window.location.href = "/mqtt";
     });

@@ -19,7 +19,7 @@
                 <h1>ESP RTS Remote</h1>
                 <div class="mt-4">
                     <h2>OTA upgrade by file upload</h2>
-                    <form method='POST' action='/ota' enctype='multipart/form-data'>
+                    <form method='POST' action='/ota' enctype='multipart/form-data' onsubmit="return confirm('Confirm firmware update');">
                         <div class="mt-5 mb-3 text-start">
                             <input type="file" class="form-control" id="ota-file" name='update'>
                         </div>
