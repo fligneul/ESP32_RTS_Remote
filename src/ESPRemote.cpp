@@ -15,7 +15,7 @@
 #include "RemoteWebConfig.h"
 #include "WifiHandler.h"
 #include "WifiWebConfig.h"
-#include "wifiScanner.h"
+#include "WifiScanner.h"
 
 AsyncWebServer server(80);
 WifiWebConfig wifiWebConfig(&server);
